@@ -1,0 +1,4 @@
+id,addressId,country,region,city,address,postCode
+1,11xx11,USA,FL,Miami,SunnyDay-12,1254EE
+2,12xx11,NL,,Amsterdam,Piligrimstroot,2311RP
+3,13xx11,Test-Country,Test-city,Test-region,Test-address,TTTT

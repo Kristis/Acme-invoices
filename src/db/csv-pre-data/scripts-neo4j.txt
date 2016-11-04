@@ -1,0 +1,98 @@
+// Create customers
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///customers.csv" AS row
+CREATE (:Customer {id : toInt(row.id), firstName : row.firstName, middleName : row.middleName, lastName : row.lastName, email : row.email, addressID : row.addressId});
+
+// Create customer address
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///customer_address.csv" AS row
+CREATE (:CustomerAddress {addressID : toInt(row.id), customerAddressID: row.addressId, country : row.country, region : row.region,city : row.city, address : row.address,postCode : row.postCode});
+
+// Create customer invoices
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///customer_invoices.csv" AS row
+CREATE (:CustomerInvoices {id : toInt(row.customerId),
+                           invoiceId : row.invoiceId,
+                           invoiceType : row.invoiceType,
+                           invoiceStatus : row.invoiceStatus,
+                           invoiceTypeLocalized : row.invoiceTypeLocalized,
+                           invoiceDate : row.invoiceDate,
+                           paymentDate : row.paymentDate,
+                           invoiceNumber : toInt(row.invoiceNumber),
+                           starDate : row.starDate,
+                           endDate : row.endDate,
+                           periodDescription : row.periodDescription,
+                           amount : toFloat(row.amount),
+                           vat : toFloat(row.vat),
+                           totalAmount : toFloat(row.totalAmount)
+                           year : toInt(row.year)
+                           month : toInt(row.month)
+                           });
+
+CREATE (y:Year { year:2017 })
+MERGE (y)<-[:IN_YEAR]-(m1:Month { month:1 })
+MERGE (y)<-[:IN_YEAR]-(m2:Month { month:2 })
+MERGE (y)<-[:IN_YEAR]-(m3:Month { month:3 })
+MERGE (y)<-[:IN_YEAR]-(m4:Month { month:4 })
+MERGE (y)<-[:IN_YEAR]-(m5:Month { month:5 })
+MERGE (y)<-[:IN_YEAR]-(m6:Month { month:6 })
+MERGE (y)<-[:IN_YEAR]-(m7:Month { month:7 })
+MERGE (y)<-[:IN_YEAR]-(m8:Month { month:8 })
+MERGE (y)<-[:IN_YEAR]-(m9:Month { month:9 })
+MERGE (y)<-[:IN_YEAR]-(m10:Month { month:10 })
+MERGE (y)<-[:IN_YEAR]-(m11:Month { month:11 })
+MERGE (y)<-[:IN_YEAR]-(m12:Month { month:12 })
+RETURN y;
+
+CREATE (y:Year { year:2016 })
+MERGE (y)<-[:IN_YEAR]-(m1:Month { month:1 })
+MERGE (y)<-[:IN_YEAR]-(m2:Month { month:2 })
+MERGE (y)<-[:IN_YEAR]-(m3:Month { month:3 })
+MERGE (y)<-[:IN_YEAR]-(m4:Month { month:4 })
+MERGE (y)<-[:IN_YEAR]-(m5:Month { month:5 })
+MERGE (y)<-[:IN_YEAR]-(m6:Month { month:6 })
+MERGE (y)<-[:IN_YEAR]-(m7:Month { month:7 })
+MERGE (y)<-[:IN_YEAR]-(m8:Month { month:8 })
+MERGE (y)<-[:IN_YEAR]-(m9:Month { month:9 })
+MERGE (y)<-[:IN_YEAR]-(m10:Month { month:10 })
+MERGE (y)<-[:IN_YEAR]-(m11:Month { month:11 })
+MERGE (y)<-[:IN_YEAR]-(m12:Month { month:12 })
+RETURN y;
+
+//INDEX
+CREATE INDEX ON :CustomerAddress(addressID);
+CREATE INDEX ON :CustomerAddress(customerAddressID);
+CREATE INDEX ON :CustomerInvoices(id);
+CREATE INDEX ON :CustomerInvoices(invoiceId);
+
+
+
+//UNIQUE CONSTRAINT
+CREATE CONSTRAINT ON (ci:CustomerInvoices) ASSERT ci.invoiceNumber IS UNIQUE;
+CREATE CONSTRAINT ON (c:Customer) ASSERT c.id IS UNIQUE;
+
+
+//RELATIONSHIPS
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///customers.csv" AS row
+MATCH (address:CustomerAddress {customerAddressID: row.addressId})
+MATCH (customer:Customer {id: toInt(row.id)})
+MERGE (customer)-[:LIVING_IN]->(address);
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///customer_invoices.csv" AS row
+MATCH (invoice:CustomerInvoices {invoiceNumber: toInt(row.invoiceNumber)})
+MATCH (customer:Customer {customerID: toInt(row.customerId)})
+MERGE (invoice)-[:BILL_FOR]->(customer);
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///customer_invoices.csv" AS row
+MATCH (invoice:CustomerInvoices {invoiceNumber: toInt(row.invoiceNumber)})
+MATCH (y:Year {year: toInt(row.year)})
+MERGE (invoice)-[:BILL_YEAR]->(y);
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///customer_invoices.csv" AS row
+MATCH (invoice:CustomerInvoices {invoiceNumber: toInt(row.invoiceNumber)})
+MATCH (m:Month {month: toInt(row.month}))
+MERGE (invoice)-[:BILL_MONTH]->(m);

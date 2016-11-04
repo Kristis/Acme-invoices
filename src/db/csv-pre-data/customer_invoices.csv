@@ -1,0 +1,2 @@
+customerId,invoiceId,invoiceType,invoiceStatus,invoiceTypeLocalized,invoiceDate,paymentDate,invoiceNumber,starDate,endDate,periodDescription,amount,vat,totalAmount,year,month
+1,zz11zz11,ADVANCE_PAYMENT,NEW,Winkel aankoop,2016-11-11T00:00:00.000-00:00,2016-11-30T00:00:00.000-00:00,111234,2016-11-01T00:00:00.000-00:00,2016-11-30T00:00:00.000-00:00,Test-description,440,20,480,2016,11
