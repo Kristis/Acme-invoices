@@ -11,6 +11,9 @@ import org.springframework.data.annotation.Id;
 import java.util.Date;
 
 /**
+ * Customer invoice entity.
+ * Customer can have multiple invoices
+ * <p>
  * Created by kristisvaskys on 03/11/2016.
  */
 @NodeEntity(label = "CustomerInvoices")

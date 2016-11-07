@@ -8,6 +8,8 @@ import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.data.annotation.Id;
 
 /**
+ * Customer entity. Store basic information.
+ * <p>
  * Created by kristisvaskys on 03/11/2016.
  */
 @NodeEntity

@@ -3,7 +3,7 @@ package nl.acme.invoices.controller;
 import nl.acme.invoices.domain.invoice.CustomerInvoice;
 import nl.acme.invoices.domain.invoice.InvoiceType;
 import nl.acme.invoices.repository.InvoicesRepository;
-import nl.acme.invoices.services.CustomerInvoicesSerive;
+import nl.acme.invoices.services.CustomerInvoicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
@@ -17,6 +17,10 @@ import java.time.ZoneId;
 import java.util.Date;
 
 /**
+ * Invoice rest controller.
+ * This controller return basic data about customer.
+ * Also, generate random invoices for customers;
+ * <p>
  * Created by kristisvaskys on 03/11/2016.
  */
 @RestController
@@ -24,21 +28,41 @@ import java.util.Date;
 public class CustomerInvoiceRestController {
 
     private static final String SHOP_FILTER = "shop";
+
     @Autowired
     private InvoicesRepository invoicesRepository;
-    @Autowired
-    private CustomerInvoicesSerive customerInvoicesSerive;
 
+    @Autowired
+    private CustomerInvoicesService customerInvoicesSerive;
+
+    /**
+     * Return all invoices for all customers.
+     * <p>
+     * TODO: remove for PROD usage, only for testing
+     *
+     * @return list of CustomerInvoice
+     */
     @RequestMapping(value = "/invoices/", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Iterable<CustomerInvoice> list() {
         return invoicesRepository.findAll();
     }
 
+    /**
+     * Generate random invoices for customers
+     *
+     * @return list of CustomerInvoice
+     */
     @RequestMapping(value = "/invoices/", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public Iterable<CustomerInvoice> generateInvoices() {
         return customerInvoicesSerive.generateInvoices();
     }
 
+    /**
+     * Search invoices by customerID
+     *
+     * @param customerId
+     * @return list of CustomerInvoice
+     */
     @RequestMapping(value = "/invoices/", params = {"customerId"}, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Iterable<CustomerInvoice> findByCustomerId(@RequestParam("customerId") String customerId) {
         Long id = Long.valueOf(customerId);
@@ -49,12 +73,27 @@ public class CustomerInvoiceRestController {
         }
     }
 
+    /**
+     * Search invoices by CustomerId and Customer addressId
+     *
+     * @param customerId
+     * @param addressId
+     * @return list of CustomerInvoice
+     */
     @RequestMapping(value = "/invoices/", params = {"customerId", "addressId"}, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Iterable<CustomerInvoice> findByCustomerIdAddressId(@RequestParam("customerId") String customerId, @RequestParam("addressId") String addressId) {
         Long id = Long.valueOf(customerId);
         return invoicesRepository.findByCustomerIdAddressId(id, addressId);
     }
 
+    /**
+     * Search invoices by CustomerId and invoice month.
+     * Note: Searching in current year
+     *
+     * @param customerId
+     * @param month
+     * @return list of CustomerInvoice
+     */
     @RequestMapping(value = "/invoices/", params = {"customerId", "month"}, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Iterable<CustomerInvoice> findByCustomerIdMonth(@RequestParam("customerId") String customerId, @RequestParam("month") String month) {
         Long id = Long.valueOf(customerId);
@@ -63,6 +102,14 @@ public class CustomerInvoiceRestController {
         return invoicesRepository.findByCustomerIdMonth(id, localDate.getYear(), monthInt);
     }
 
+    /**
+     * Search by invoices by CustomerId and invoice month and invoices type
+     *
+     * @param customerId
+     * @param filter
+     * @param month
+     * @return list of CustomerInvoice
+     */
     @RequestMapping(value = "/invoices/", params = {"customerId", "filter", "month"}, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Iterable<CustomerInvoice> findByCustomerIdMonthFilter(@RequestParam("customerId") String customerId, @RequestParam("filter") String filter, @RequestParam("month") String month) {
         Long id = Long.valueOf(customerId);

@@ -7,6 +7,9 @@ import org.neo4j.ogm.annotation.Property;
 import org.springframework.data.annotation.Id;
 
 /**
+ * Customer Address entity.
+ * Customer can have one address
+ * <p>
  * Created by kristisvaskys on 03/11/2016.
  */
 

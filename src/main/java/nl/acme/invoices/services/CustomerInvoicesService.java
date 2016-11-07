@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +17,9 @@ import java.util.List;
  * Created by kristisvaskys on 04/11/2016.
  */
 @Service
-public class CustomerInvoicesSerive {
+public class CustomerInvoicesService {
 
-    Logger logger = LoggerFactory.getLogger(CustomerInvoicesSerive.class);
+    Logger logger = LoggerFactory.getLogger(CustomerInvoicesService.class);
 
     @Autowired
     private InvoicesRepository invoicesRepository;
@@ -29,6 +27,13 @@ public class CustomerInvoicesSerive {
     @Autowired
     private CustomerRepository customerRepository;
 
+    /**
+     * Generate random invoices for customers
+     * <p>
+     * TODO: Split in batch. Maybe even in batch jobs.
+     *
+     * @return list of generated CustomerInvoices
+     */
     public List<CustomerInvoice> generateInvoices() {
         List<Customer> customers = customerRepository.findAllCustomersWithoutInvoices();
         logger.debug("{} customers was found!", customers.size());
@@ -43,26 +48,6 @@ public class CustomerInvoicesSerive {
 
         logger.debug("{} invoices was created!", invoices.size());
         return invoices;
-    }
-
-    /**
-     * @param customerId
-     * @param month
-     * @return
-     */
-    public List<CustomerInvoice> findByCustomerIdAndMonth(Long customerId, Integer month) {
-        List<CustomerInvoice> invoices = invoicesRepository.findByCustomerId(customerId);
-        List<CustomerInvoice> returnInvoices = new ArrayList<>(invoices.size());
-        for (CustomerInvoice i : invoices) {
-            if (i.getStartDate() != null) {
-                LocalDate localDate = i.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (localDate.getMonthValue() == month) {
-                    returnInvoices.add(i);
-                }
-            }
-        }
-
-        return returnInvoices;
     }
 
 

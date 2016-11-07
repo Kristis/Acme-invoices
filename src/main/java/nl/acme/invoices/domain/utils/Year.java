@@ -5,6 +5,9 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
 
 /**
+ * Split invoices in years.
+ * Every month have relationship with year
+ * <p>
  * Created by kristisvaskys on 04/11/2016.
  */
 @NodeEntity

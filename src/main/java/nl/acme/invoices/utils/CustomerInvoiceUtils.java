@@ -18,6 +18,12 @@ public class CustomerInvoiceUtils {
 
     private static final Double VAT = 0.20;
 
+    /**
+     * Random invoice generation
+     *
+     * @param customer
+     * @return new CustomerInvoice
+     */
     public static CustomerInvoice createCustomerInvoice(Customer customer) {
         Random random = new Random();
         CustomerInvoice invoice = new CustomerInvoice();
@@ -25,7 +31,7 @@ public class CustomerInvoiceUtils {
         invoice.setVat(VAT);
         invoice.setCustomer(customer);
         invoice.setTotalAmount(invoice.getAmount() + (invoice.getAmount() * VAT));
-        invoice.setInvoiceNumber(random.nextLong());
+        invoice.setInvoiceNumber(Math.abs(random.nextLong()));
         invoice.setStartDate(new Date());
         invoice.setEndDate(new Date());
         invoice.setPaymentDueDate(new Date());
