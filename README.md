@@ -7,10 +7,15 @@ For the first time I used NoSql database in project.
 ## Code Example
 
 Problem that this project try to solve is get data for invoices generation. This data are getting thrue REST API. Right now API support there functions:
-```
-local
-```
 
+###### Get all customer invoices
+```ffffff
+http://localhost:8080/sysapi/v1.0/invoices/?customerId=1
+```
+###### Get customer invoices by address
+```
+http://localhost:8080/sysapi/v1.0/invoices/?customerId=1&addressId=xsxx
+```
 
 ## Motivation
 
