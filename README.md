@@ -98,9 +98,9 @@ If you want to run this project on your local machine you need:
 - Run application:
   - Run AcmeInvoicesDemoApplication on IDE
   - Or run command ```mvn spring-boot:run``` in terminal
-- Use
+- Have fun
   
 
 ## Tests
-Right now there is only 4 tests. ;(
+Right now there are only 4 tests. ;(
 
