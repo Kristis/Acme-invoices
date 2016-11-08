@@ -17,17 +17,17 @@ One invoice is related with one customer.
         | 1
         |
         v
-  /-------------\  
-  |   Address    |
+  /-------------\   
+  |   Address   |
   \-------------/
  ```
   
-  More colorful and more represedentive look can be provided with Neo4j tool:
-  ![Acme-Invoices-Schema](http://imgur.com/a/FgZdC.png)
+  More colorful and more represedentive look can be provided with Neo4j tool: <br/>
+  ![alt tag](http://imgur.com/a/FgZdC.png)
 
 ## Code Example
 
-Problem that this project try to solve is get data for invoices generation. This data are getting thrue REST API. Right now API support there functions:
+Problem that this project try to solve is get data for invoices generation. This data are getting thrue REST API. Right now API support there functions:f
 
 ###### Get all customer invoices
 ```ffffff
