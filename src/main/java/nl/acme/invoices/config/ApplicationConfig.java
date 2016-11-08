@@ -1,14 +1,13 @@
 package nl.acme.invoices.config;
 
+import nl.acme.invoices.services.CustomerInvoicesService;
+import nl.acme.invoices.services.CustomerInvoicesServiceImpl;
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
@@ -23,6 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @EntityScan(basePackages = "nl.acme.invoices")
+@ComponentScan({"nl.acme.invoices.services"})
 @Configuration
 @EnableNeo4jRepositories("nl.acme.invoices.repository")
 public class ApplicationConfig extends Neo4jConfiguration {
@@ -59,5 +59,10 @@ public class ApplicationConfig extends Neo4jConfiguration {
     @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public Session getSession() throws Exception {
         return super.getSession();
+    }
+
+    @Bean
+    public CustomerInvoicesService customerInvoicesService() {
+        return new CustomerInvoicesServiceImpl();
     }
 }

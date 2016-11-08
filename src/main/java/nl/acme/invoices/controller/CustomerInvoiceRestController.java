@@ -33,7 +33,7 @@ public class CustomerInvoiceRestController {
     private InvoicesRepository invoicesRepository;
 
     @Autowired
-    private CustomerInvoicesService customerInvoicesSerive;
+    private CustomerInvoicesService customerInvoicesService;
 
     /**
      * Return all invoices for all customers.
@@ -54,7 +54,7 @@ public class CustomerInvoiceRestController {
      */
     @RequestMapping(value = "/invoices/", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public Iterable<CustomerInvoice> generateInvoices() {
-        return customerInvoicesSerive.generateInvoices();
+        return customerInvoicesService.generateInvoices();
     }
 
     /**
@@ -122,6 +122,10 @@ public class CustomerInvoiceRestController {
             return null;
         }
 
+    }
+
+    public void setCustomerInvoicesServiceImpl(CustomerInvoicesService customerInvoicesService) {
+        this.customerInvoicesService = customerInvoicesService;
     }
 
 }
