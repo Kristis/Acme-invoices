@@ -1,13 +1,12 @@
 ## Synopsis
 
-Acme-invoices is a small project wich was create as programming task for one company. It's very basic REST API wich return basic customer and invoices information.
-Technological stack is: Spring-Boot, Spring-Data, Neo4j.
-For the first time I used NoSql database in project.
+'Acme-invoices' is a small project which was created as a programming task for one company. Solution is a basic REST API which returns basic customer and invoice information.
+Technological stack is: Spring-Boot, Spring-Data, Spring-MVC, Neo4j, Java8.
+I used NoSql database for a project for the first time.
 
 ## Data structure
 
-Data structure is very simple. Every customer can have one address, many invoices.
-One invoice is related with one customer.
+Data structure is simple - every customer can have one address, many invoices; one invoice is related with one customer.
 ```
  /-------------\         N         /-------------\ 
  |   Customer  | ----------------> |   Invoice   |
@@ -22,7 +21,7 @@ One invoice is related with one customer.
   \-------------/
  ```
   
-  More colorful and more represedentive look can be provided with Neo4j tool: <br/>
+  More colorful and more representative look can be provided using one of Neo4j tools: <br/>
   ![alt tag](http://i.imgur.com/yVqeLTq.png)
    - Green color: Customer
    - Red color: Address
@@ -31,10 +30,10 @@ One invoice is related with one customer.
 
 ## Code Example
 
-Problem that this project try to solve is get data for invoices generation. This data are getting thrue REST API. Right now API support there functions:
+Problem that this project aims to solve is to get data for invoice generation. Right now, API supports these functions:
 
 ###### Get all customer invoices
-```ffffff
+```
 GET http://localhost:8080/sysapi/v1.0/invoices/?customerId=1
 ```
 ###### Get customer invoices by address
@@ -49,12 +48,12 @@ GET http://localhost:8080/sysapi/v1.0/invoices/?customerId=1&month=11
 ```
 GET http://localhost:8080/sysapi/v1.0/invoices/?customerId=1filter=shop&month=11
 ```
-###### Generate invoices for customers (Random data). 
+###### Generate invoices for customers (random data). 
 ```
 POST http://localhost:8080/sysapi/v1.0/invoices/
 ```
 
-###### Responce example
+###### Response example
 ```json
  {
     "invoiceNumber": 8936476887954768310,
@@ -89,19 +88,19 @@ POST http://localhost:8080/sysapi/v1.0/invoices/
 ## Installation
 
 If you want to run this project on your local machine you need:
-- Install Neo4j database on you machine. Download: [Neo4j](https://neo4j.com/download/)
-- Create folder with name "import" in  /Users/user/Documents/Neo4j/default.graphdb/
-- Create demo data
+- Install Neo4j database on your local machine. Download: [Neo4j](https://neo4j.com/download/)
+- Create folder named "import" in  /Users/user/Documents/Neo4j/default.graphdb/
+- Create demo data:
   - Open folder [Pre-Data](https://github.com/Kristis/Acme-invoices/tree/master/src/db/csv-pre-data)
-  - Into new folder "import" put files customer_address.csv, customers.csv customer_invoices.csv
+  - Put the following files into new folder "import": customer_address.csv, customers.csv customer_invoices.csv
   - Run scripts from [Scripts](https://github.com/Kristis/Acme-invoices/blob/master/src/db/csv-pre-data/scripts-neo4j.txt)
-- Build project with ```mvn clean install``` (if you don't have maven use Maven wrapper ```mvnw clean install```)
+- Build project with ```mvn clean install``` (if you do not have maven use Maven wrapper ```mvnw clean install```)
 - Run application:
-  - On IDE run AcmeInvoicesDemoApplication
-  - On terminal run command ```mvn spring-boot:run```
+  - Run AcmeInvoicesDemoApplication on IDE
+  - Or run command ```mvn spring-boot:run``` in terminal
 - Use
   
 
 ## Tests
-Right now there is only 4 tests.
+Right now there is only 4 tests. ;(
 
