@@ -81,34 +81,6 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.9</version>
         </dependency>
-        <dependency>
-            <groupId>com.lordofthejars</groupId>
-            <artifactId>nosqlunit-neo4j</artifactId>
-            <version>0.10.0</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>neo4j-kernel</artifactId>
-                    <groupId>org.neo4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>neo4j-cypher</artifactId>
-                    <groupId>org.neo4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>neo4j-server</artifactId>
-                    <groupId>org.neo4j.app</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>neo4j-cypher-plugin</artifactId>
-                    <groupId>org.neo4j.server.plugin</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>3.2.5.RELEASE</version>
-        </dependency>
     </dependencies>
 
 

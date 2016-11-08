@@ -1,7 +1,5 @@
 package nl.acme.invoices.config;
 
-import nl.acme.invoices.services.CustomerInvoicesService;
-import nl.acme.invoices.services.CustomerInvoicesServiceImpl;
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @EntityScan(basePackages = "nl.acme.invoices")
-@ComponentScan({"nl.acme.invoices.services"})
+@ComponentScan({"nl.acme.invoices"})
 @Configuration
 @EnableNeo4jRepositories("nl.acme.invoices.repository")
 public class ApplicationConfig extends Neo4jConfiguration {
@@ -61,8 +59,4 @@ public class ApplicationConfig extends Neo4jConfiguration {
         return super.getSession();
     }
 
-    @Bean
-    public CustomerInvoicesService customerInvoicesService() {
-        return new CustomerInvoicesServiceImpl();
-    }
 }

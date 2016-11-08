@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by kristisvaskys on 04/11/2016.
  */
-@Service("customerInvoicesService")
+@Service
 public class CustomerInvoicesServiceImpl implements CustomerInvoicesService {
 
     Logger logger = LoggerFactory.getLogger(CustomerInvoicesServiceImpl.class);
