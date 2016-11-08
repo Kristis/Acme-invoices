@@ -1,14 +1,14 @@
 ## Synopsis
 
 Acme-invoices is a small project wich was create as programming task for one company. It's very basic REST API wich return basic customer and invoices information.
-Technological stack is: Spring-Boot, Spring-Data, Neo4j.fffffffff
+Technological stack is: Spring-Boot, Spring-Data, Neo4j.
 For the first time I used NoSql database in project.
 
 ## Data structure
 
 Data structure is very simple. Every customer can have one address, many invoices.
 One invoice is related with one customer.
-
+```
  /-------------\         N         /-------------\ 
  |   Customer  | ----------------> |   Invoice   |
  \-------------/                   \-------------/
@@ -20,9 +20,10 @@ One invoice is related with one customer.
   /-------------\  
   |   Address    |
   \-------------/
+ ```
   
   More colorful and more represedentive look can be provided with Neo4j tool:
-  ![Acme-Invoices-Schema](http://imgur.com/a/FgZdC?raw=true)
+  ![Acme-Invoices-Schema](http://imgur.com/a/FgZdC.png)
 
 ## Code Example
 
