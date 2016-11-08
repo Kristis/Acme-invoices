@@ -95,7 +95,7 @@ If you want to run this project on your local machine you need:
   - Open folder [Pre-Data](https://github.com/Kristis/Acme-invoices/tree/master/src/db/csv-pre-data)
   - Into new folder "import" put files customer_address.csv, customers.csv customer_invoices.csv
   - Run scripts from [Scripts](https://github.com/Kristis/Acme-invoices/blob/master/src/db/csv-pre-data/scripts-neo4j.txt)
-- Build project with '''mvn clean install''' (if you don't have maven use Maven wrapper ```mvnw clean install```)
+- Build project with ```mvn clean install``` (if you don't have maven use Maven wrapper ```mvnw clean install```)
 - Run application:
   - On IDE run AcmeInvoicesDemoApplication
   - On terminal run command ```mvn spring-boot:run```
