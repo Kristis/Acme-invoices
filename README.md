@@ -24,10 +24,14 @@ One invoice is related with one customer.
   
   More colorful and more represedentive look can be provided with Neo4j tool: <br/>
   ![alt tag](http://i.imgur.com/yVqeLTq.png)
+   - Green color: Customer
+   - Red color: Address
+   - Purple color: Invoice
+   - Pink/Yellow color: Invoice start date
 
 ## Code Example
 
-Problem that this project try to solve is get data for invoices generation. This data are getting thrue REST API. Right now API support there functions:f
+Problem that this project try to solve is get data for invoices generation. This data are getting thrue REST API. Right now API support there functions:
 
 ###### Get all customer invoices
 ```ffffff
@@ -82,14 +86,10 @@ POST http://localhost:8080/sysapi/v1.0/invoices/
   }
 ```
 
-## Motivation
-
-
 ## Installation
 
 
-## API Reference
-
 
 ## Tests
+Right now there is only 4 tests.
 
