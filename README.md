@@ -87,8 +87,14 @@ POST http://localhost:8080/sysapi/v1.0/invoices/
 ```
 
 ## Installation
-
-
+If you want to run this project on your local machine you need:
+- Install Neo4j database on you machine. Download: [Neo4j](https://neo4j.com/download/)
+- Create folder with name "import" in  /Users/user/Documents/Neo4j/default.graphdb/
+- Create demo data
+  - Open folder (Pre-Data)[https://github.com/Kristis/Acme-invoices/tree/master/src/db/csv-pre-data]
+  - Into new folder "import" put files customer_address.csv, customers.csv customer_invoices.csv
+  - Run scripts from (Scripts)[https://github.com/Kristis/Acme-invoices/blob/master/src/db/csv-pre-data/scripts-neo4j.txt]
+- Build project with '''mvn clean install'''
 
 ## Tests
 Right now there is only 4 tests.
