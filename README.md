@@ -57,7 +57,7 @@ POST http://localhost:8080/sysapi/v1.0/invoices/
 ###### Responce example
 ```json
  {
-    "invoiceNumber": -8936476887954768310,
+    "invoiceNumber": 8936476887954768310,
     "customer": {
       "customerId": 2,
       "firstName": "Guatemala",
