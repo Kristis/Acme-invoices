@@ -23,7 +23,7 @@ One invoice is related with one customer.
  ```
   
   More colorful and more represedentive look can be provided with Neo4j tool: <br/>
-  ![alt tag](http://imgur.com/a/FgZdC.png)
+  ![alt tag](http://i.imgur.com/yVqeLTq.png)
 
 ## Code Example
 
